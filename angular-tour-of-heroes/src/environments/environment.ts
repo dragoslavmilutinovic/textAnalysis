@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  textSimilarityUrl: 'https://api.dandelion.eu/datatxt/sim/v1',
+  entityExtractionUrl: 'https://api.dandelion.eu/datatxt/nex/v1',
+  langDetectionUrl: 'https://api.dandelion.eu/datatxt/li/v1',
+  sentimentAnalysis: 'https://api.dandelion.eu/datatxt/sent/v1',
 };
 
 /*
