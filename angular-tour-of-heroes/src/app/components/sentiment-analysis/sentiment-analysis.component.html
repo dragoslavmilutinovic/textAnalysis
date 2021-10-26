@@ -1,1 +1,21 @@
-<p>sentiment-analysis works!</p>
+<div>
+    <h3>Configuration page</h3>
+    <p>Configuration page visits:</p>
+
+    <div>
+        <form (submit)="sentimentAnalysis()" class="mb-5">
+            <div>
+                <label for="name">User Name</label>
+            </div>
+            <label for="name">Enter text:</label>
+            <textarea name="message" [(ngModel)]="text" ></textarea>
+            <label>Options</label>
+            <select name="lang" id="lang" [(ngModel)]="lang">
+                <option value="en">English</option>
+                <option value="it">Italian</option>
+                <option value="auto">Auto</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

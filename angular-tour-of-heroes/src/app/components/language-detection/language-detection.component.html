@@ -1,1 +1,20 @@
-<p>language-detection works!</p>
+<div>
+    <h3>Configuration page</h3>
+    <p>Configuration page visits:</p>
+
+    <div>
+        <form (submit)="detectLanguage()" class="mb-5">
+            <div>
+                <label for="name">User Name</label>
+                <textarea [(ngModel)]="text"></textarea>
+                <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="clean">
+            </div>
+      
+            <li *ngFor="let language of languages">
+                {{language.lang}}
+            </li>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

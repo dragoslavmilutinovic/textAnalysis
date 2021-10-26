@@ -1,1 +1,29 @@
-<p>entity-extraction works!</p>
+<div>
+    <h3>Configuration page</h3>
+    <p>Configuration page visits:</p>
+
+    <div>
+        <form (submit)="extractEntities()" class="mb-5">
+            <div>
+                <label for="name">Enter text:</label>
+                <textarea name="message" [(ngModel)]="text" ></textarea>
+                <label>Image</label>
+                <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="checks[0]">
+                <label>abstract</label>
+                <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="checks[1]">
+                <label>categories</label>
+                <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="checks[2]">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <li *ngFor="let annotation of arr">
+            {{annotation.label}}
+            <img *ngIf="annotation.image" class="images" src={{annotation.image.full}}/> 
+            {{annotation.abstract}}
+            <div *ngFor="let categorie of annotation.categories">
+                {{categorie}}
+            </div>
+        </li>
+    </div>
+</div>

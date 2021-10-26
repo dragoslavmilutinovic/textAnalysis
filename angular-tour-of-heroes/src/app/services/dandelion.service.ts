@@ -10,7 +10,7 @@ export class DandelionService {
   private readonly textSimilarityUrl: string = environment.textSimilarityUrl;
   private readonly entityExtractionUrl: string = environment.entityExtractionUrl;
   private readonly langDetectionUrl: string = environment.langDetectionUrl;
-  private readonly sentimentAnalysis: string = environment.sentimentAnalysis;
+  private readonly sentimentAnalysisUrl: string = environment.sentimentAnalysis;
   private readonly token:string = '610b33c56a2a43ff8b21ceb5aa588e63'
   constructor(private httpClient: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class DandelionService {
   }
 
   detectLanguage(text: string, clean: boolean) {
-    return this.httpClient.post(this.langDetectionUrl, {
+    return this.httpClient.get(this.langDetectionUrl, {
       params: {
         text: text,
         token: this.token,
@@ -38,16 +38,28 @@ export class DandelionService {
     })
   }
 
-  extractEntities(text: string) {
-    return this.httpClient.post(this.entityExtractionUrl, {
+  extractEntities(text: string,include:string) {
+    
+    return this.httpClient.get(this.entityExtractionUrl, {
       params: {
         lang: 'en',
         text: text,
         token: this.token,
-        include: 'abstract, image'
+        include: include,
       }
     })
   }
+  sentimentAnalysis(text:string,lang:string){
+    return this.httpClient.get(this.sentimentAnalysisUrl, {
+      params: {
+        lang: lang,
+        text: text,
+        token: this.token,
+      }
+    })
+
+  }
+
 
 
 }
