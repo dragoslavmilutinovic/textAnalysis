@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DandelionService } from 'src/app/services/dandelion.service';
+import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
   selector: 'app-entity-extraction',
@@ -9,19 +10,24 @@ import { DandelionService } from 'src/app/services/dandelion.service';
 export class EntityExtractionComponent implements OnInit {
   checks: boolean[];
   checkNames: string[];
-  keys:number[];
+  keys: number[];
   text: string;
   arr: any[];
+  minConfidence: number;
   constructor(private dandelionService: DandelionService) {
     this.checks = [false, false, false];
     this.checkNames = ['image', 'abstract', 'categories'];
-    this.keys=[0,1,2];
+    this.keys = [0, 1, 2];
     this.text = '';
     this.arr = [];
+    this.minConfidence = 0;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   extractEntities() {
-    const include: string = this.keys.filter((index: number) => this.checks[index]).map((index:number) => this.checkNames[index]).join(',');
-    this.dandelionService.extractEntities(this.text, include).subscribe((data: any) => {this.arr = data.annotations;});
+    console.log(this.minConfidence);
+    const include: string = this.keys.filter((index: number) => this.checks[index]).map((index: number) => this.checkNames[index]).join(',');
+    this.dandelionService.extractEntities(this.text, include).subscribe((data: any) => {
+      this.arr = data.annotations.filter((annotation: any) => annotation.confidence * 100 > this.minConfidence);
+    });
   }
 }

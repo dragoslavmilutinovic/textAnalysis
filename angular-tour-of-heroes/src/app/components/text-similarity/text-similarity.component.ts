@@ -22,12 +22,6 @@ export class TextSimilarityComponent implements OnInit {
   }
 
   checkTextSimilarities() {
-    console.log("ovo je text 1");
-    console.log(this.text1);
-    console.log("ovo je text 2");
-    console.log(this.text2);
-    this.dandelionService.checkTextSimilarities(this.text1, this.text2).subscribe((data: any) => {
-      this.similarity = data.similarity;
-    });
+    this.dandelionService.checkTextSimilarities(this.text1, this.text2).subscribe((data: any) => { this.similarity = data.similarity; });
   }
 }

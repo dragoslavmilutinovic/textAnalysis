@@ -9,9 +9,15 @@ import { DandelionService } from 'src/app/services/dandelion.service';
 export class SentimentAnalysisComponent implements OnInit {
   text:string;
   lang:string;
+  type:string="";
+  green:number;
+  red:number;
+
   constructor(private dandelionService: DandelionService) { 
     this.text="";
     this.lang="auto";
+    this.green=255;
+    this.red=255;
   }
 
   ngOnInit(): void {
@@ -19,7 +25,24 @@ export class SentimentAnalysisComponent implements OnInit {
   }
 
   sentimentAnalysis() {
-    this.dandelionService.sentimentAnalysis(this.text,this.lang).subscribe((data: any) => {console.log(data)});
+    this.dandelionService.sentimentAnalysis(this.text,this.lang).subscribe((data: any) => {
+      const score=this.normalizeRange(data.sentiment.score);
+      this.red=255*(1-score);
+      this.green=255*score;
+      this.type=data.sentiment.type;
+    });
+  
   }
+  getColorString() {
+    this.red=0;
+    this.green=255;
+    const color:string=`rgb(${this.red},${this.green},0)`;
+    console.log(color);
+    return color;
+  }
+  private normalizeRange(x:any):number{
+    return (x + 1) / 2;
+  } 
+ 
 
 }

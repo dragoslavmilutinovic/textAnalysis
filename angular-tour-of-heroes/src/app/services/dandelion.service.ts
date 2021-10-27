@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { HistoryService } from './history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,11 @@ export class DandelionService {
   private readonly entityExtractionUrl: string = environment.entityExtractionUrl;
   private readonly langDetectionUrl: string = environment.langDetectionUrl;
   private readonly sentimentAnalysisUrl: string = environment.sentimentAnalysis;
-  private readonly token:string = '610b33c56a2a43ff8b21ceb5aa588e63'
-  constructor(private httpClient: HttpClient) { }
+  private readonly token:string = 'bb24090143524e35b78bcbfe29014d95'
+  constructor(private httpClient: HttpClient,private historyService:HistoryService) { }
 
   checkTextSimilarities(text1: string, text2: string) {
-    console.log("ovo je text1 na servisu");
-    console.log(text1);
-    console.log("ovo je text2 na servisu");
-    console.log(text2);
+    this.historyService.recordApiCall(this.textSimilarityUrl);
     return this.httpClient.get(this.textSimilarityUrl, {
       params: {
         text1: text1,
@@ -29,6 +27,7 @@ export class DandelionService {
   }
 
   detectLanguage(text: string, clean: boolean) {
+    this.historyService.recordApiCall(this.langDetectionUrl);
     return this.httpClient.get(this.langDetectionUrl, {
       params: {
         text: text,
@@ -39,7 +38,7 @@ export class DandelionService {
   }
 
   extractEntities(text: string,include:string) {
-    
+    this.historyService.recordApiCall(this.entityExtractionUrl);
     return this.httpClient.get(this.entityExtractionUrl, {
       params: {
         lang: 'en',
@@ -50,6 +49,7 @@ export class DandelionService {
     })
   }
   sentimentAnalysis(text:string,lang:string){
+    this.historyService.recordApiCall(this.sentimentAnalysisUrl);
     return this.httpClient.get(this.sentimentAnalysisUrl, {
       params: {
         lang: lang,

@@ -1,20 +1,20 @@
 <div>
-    <h3>Configuration page</h3>
+    <h3>Detect language page</h3>
     <p>Configuration page visits:</p>
 
     <div>
         <form (submit)="detectLanguage()" class="mb-5">
             <div>
-                <label for="name">User Name</label>
-                <textarea [(ngModel)]="text"></textarea>
+                <label for="name">Enter text</label>
+                <textarea [(ngModel)]="text" name="text"></textarea>
+                <label>Clean</label>
                 <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="clean">
-            </div>
-      
-            <li *ngFor="let language of languages">
-                {{language.lang}}
-            </li>
-            
+            </div>      
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <li *ngFor="let language of languages">
+            {{language.lang}}
+            {{language.confidence}}
+        </li>
     </div>
 </div>

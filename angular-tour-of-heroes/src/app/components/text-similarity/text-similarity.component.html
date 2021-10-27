@@ -9,10 +9,10 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="text1" [(ngModel)]="text1">
                 <input type="text" placeholder="text2" id="name" name="name" [(ngModel)]="text2">
             </div>
-            <div *ngIf="similarity!==0">
-                {{similarity}}
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div *ngIf="similarity!==0">
+            {{similarity}}
+        </div>
     </div>
 </div>

@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  token:string;
+  token: string;
   constructor() {
-    this.token="";
+    this.token = "";
   }
 
   ngOnInit(): void {
+  }
+  submitToken(): void {
+    window.localStorage.setItem('token',this.token);
   }
 
 }
