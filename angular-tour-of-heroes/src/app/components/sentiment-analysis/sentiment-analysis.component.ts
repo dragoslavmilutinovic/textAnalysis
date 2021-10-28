@@ -34,8 +34,6 @@ export class SentimentAnalysisComponent implements OnInit {
   
   }
   getColorString() {
-    this.red=0;
-    this.green=255;
     const color:string=`rgb(${this.red},${this.green},0)`;
     console.log(color);
     return color;

@@ -22,6 +22,7 @@ export class EntityExtractionComponent implements OnInit {
     this.arr = [];
     this.minConfidence = 0;
   }
+  
   ngOnInit(): void { }
   extractEntities() {
     console.log(this.minConfidence);
