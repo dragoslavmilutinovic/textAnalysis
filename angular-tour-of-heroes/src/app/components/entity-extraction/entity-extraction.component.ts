@@ -17,14 +17,13 @@ export class EntityExtractionComponent implements OnInit {
   constructor(private dandelionService: DandelionService) {
     this.checks = [false, false, false];
     this.checkNames = ['image', 'abstract', 'categories'];
-    this.keys = [0, 1, 2];
-    this.text = '';
+    this.keys = [...Array(3).keys()];
     this.arr = [];
+    this.text = '';
     this.minConfidence = 0;
   }
   ngOnInit(): void { }
   extractEntities() {
-    console.log(this.minConfidence);
     const include: string = this.keys.filter((index: number) => this.checks[index]).map((index: number) => this.checkNames[index]).join(',');
     this.dandelionService.extractEntities(this.text, include).subscribe((data: any) => {
       this.arr = data.annotations.filter((annotation: any) => annotation.confidence * 100 > this.minConfidence);

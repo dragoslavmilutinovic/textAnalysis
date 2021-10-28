@@ -1,24 +1,22 @@
 <div>
-    <h3>Configuration page</h3>
-    <p>Configuration page visits:</p>
+    <h1>Sentiment analyisis</h1>
 
     <div>
         <form (submit)="sentimentAnalysis()" class="mb-5">
             <div>
-                <label for="name">User Name</label>
+                <textarea name="message" rows="4" cols="50" [(ngModel)]="text" ></textarea>
+                <label>Options</label>
+                <select name="lang" id="lang" [(ngModel)]="lang">
+                    <option value="en">English</option>
+                    <option value="it">Italian</option>
+                    <option value="auto">Auto</option>
+                </select>
             </div>
-            <label for="name">Enter text:</label>
-            <textarea name="message" [(ngModel)]="text" ></textarea>
-            <label>Options</label>
-            <select name="lang" id="lang" [(ngModel)]="lang">
-                <option value="en">English</option>
-                <option value="it">Italian</option>
-                <option value="auto">Auto</option>
-            </select>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <div>
-            <div [style.color]="getColorString()">{{type}}</div>
+        <div *ngIf="type.length!==0">
+            <h3>{{score}}</h3>
+            <h3 [style.color]="getColorString()">{{type}}</h3>
         </div>
     </div>
 </div>

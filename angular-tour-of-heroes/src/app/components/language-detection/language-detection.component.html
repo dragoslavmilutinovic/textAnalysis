@@ -1,12 +1,10 @@
 <div>
-    <h3>Detect language page</h3>
-    <p>Configuration page visits:</p>
+    <h1>Detect language page</h1>
 
     <div>
         <form (submit)="detectLanguage()" class="mb-5">
             <div>
-                <label for="name">Enter text</label>
-                <textarea [(ngModel)]="text" name="text"></textarea>
+                <textarea [(ngModel)]="text" name="text" rows="4" cols="50"></textarea>
                 <label>Clean</label>
                 <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="clean">
             </div>      

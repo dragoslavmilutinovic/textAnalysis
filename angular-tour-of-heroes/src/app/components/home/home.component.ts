@@ -14,8 +14,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   submitToken(): void {
     window.localStorage.setItem('token',this.token);
+    this.token='';
   }
 
 }

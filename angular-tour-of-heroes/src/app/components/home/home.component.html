@@ -1,8 +1,7 @@
 
 <form (submit)="submitToken()" class="mb-5">
     <div>
-        <label for="name">Token</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="token" [(ngModel)]="token">
+        <input type="text"  size="40" name="name" placeholder="token" [(ngModel)]="token">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

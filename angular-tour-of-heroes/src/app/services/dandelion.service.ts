@@ -12,52 +12,75 @@ export class DandelionService {
   private readonly entityExtractionUrl: string = environment.entityExtractionUrl;
   private readonly langDetectionUrl: string = environment.langDetectionUrl;
   private readonly sentimentAnalysisUrl: string = environment.sentimentAnalysis;
-  private readonly token:string = 'bb24090143524e35b78bcbfe29014d95'
-  constructor(private httpClient: HttpClient,private historyService:HistoryService) { }
+  private token: string = "";
+  constructor(private httpClient: HttpClient, private historyService: HistoryService) {
+  }
 
   checkTextSimilarities(text1: string, text2: string) {
-    this.historyService.recordApiCall(this.textSimilarityUrl);
+    const params= {
+      text1: text1,
+      text2: text2,
+      token: this.token,
+    }
+    this.historyService.recordApiCall(this.createApiCall(this.textSimilarityUrl,params));
+    this.setToken();
     return this.httpClient.get(this.textSimilarityUrl, {
-      params: {
-        text1: text1,
-        text2: text2,
-        token: this.token,
-      }
+      params,
     })
   }
 
   detectLanguage(text: string, clean: boolean) {
-    this.historyService.recordApiCall(this.langDetectionUrl);
+    const params= {
+      text: text,
+      token: this.token,
+      clean: clean,
+    }
+    this.historyService.recordApiCall(this.createApiCall(this.langDetectionUrl,params));
+    this.setToken();
     return this.httpClient.get(this.langDetectionUrl, {
-      params: {
-        text: text,
-        token: this.token,
-        clean: clean,
-      }
+       params,
     })
   }
 
-  extractEntities(text: string,include:string) {
-    this.historyService.recordApiCall(this.entityExtractionUrl);
+  extractEntities(text: string, include: string) {
+    const params= {
+      text: text,
+      token: this.token,
+      include: include,
+    }
+    this.historyService.recordApiCall(this.createApiCall(this.entityExtractionUrl,params));
+    this.setToken();
     return this.httpClient.get(this.entityExtractionUrl, {
-      params: {
-        lang: 'en',
-        text: text,
-        token: this.token,
-        include: include,
-      }
+      params,
     })
   }
-  sentimentAnalysis(text:string,lang:string){
-    this.historyService.recordApiCall(this.sentimentAnalysisUrl);
+  sentimentAnalysis(text: string, lang: string) {
+    const params = {
+      lang: lang,
+      text: text,
+      token: this.token,
+    }
+    this.historyService.recordApiCall(this.createApiCall(this.sentimentAnalysisUrl,params));
+    this.setToken();
     return this.httpClient.get(this.sentimentAnalysisUrl, {
-      params: {
-        lang: lang,
-        text: text,
-        token: this.token,
-      }
+      params,
     })
+   
 
+  }
+  setToken() {
+    const userToken=window.localStorage.getItem('token');
+    this.token=(userToken!==null)?userToken:this.token;
+    console.log(this.token);
+  }
+
+  createApiCall(url:string,params:any):string{
+    var esc = encodeURIComponent;
+    var query = Object.keys(params)
+    .map(k => esc(k) + '=' + esc(params[k]))
+    .join('&');
+    console.log(query);
+    return `${url}?${query}`;
   }
 
 
