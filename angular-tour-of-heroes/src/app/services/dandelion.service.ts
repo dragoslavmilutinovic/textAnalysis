@@ -17,19 +17,20 @@ export class DandelionService {
   }
 
   checkTextSimilarities(text1: string, text2: string) {
+    this.setToken();
     const params= {
       text1: text1,
       text2: text2,
       token: this.token,
     }
     this.historyService.recordApiCall(this.createApiCall(this.textSimilarityUrl,params));
-    this.setToken();
     return this.httpClient.get(this.textSimilarityUrl, {
       params,
     })
   }
 
   detectLanguage(text: string, clean: boolean) {
+    this.setToken();
     const params= {
       text: text,
       token: this.token,
@@ -43,25 +44,26 @@ export class DandelionService {
   }
 
   extractEntities(text: string, include: string) {
+    this.setToken();
     const params= {
       text: text,
       token: this.token,
       include: include,
     }
     this.historyService.recordApiCall(this.createApiCall(this.entityExtractionUrl,params));
-    this.setToken();
     return this.httpClient.get(this.entityExtractionUrl, {
       params,
     })
   }
   sentimentAnalysis(text: string, lang: string) {
+    console.log(lang);
+    this.setToken();
     const params = {
       lang: lang,
       text: text,
       token: this.token,
     }
     this.historyService.recordApiCall(this.createApiCall(this.sentimentAnalysisUrl,params));
-    this.setToken();
     return this.httpClient.get(this.sentimentAnalysisUrl, {
       params,
     })
