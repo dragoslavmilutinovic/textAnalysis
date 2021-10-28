@@ -1,12 +1,11 @@
 <div>
-    <h3>Configuration page</h3>
-    <p>Configuration page visits:</p>
+    <h1>Extract Entites</h1>
+
 
     <div>
         <form (submit)="extractEntities()" class="mb-5">
-            <div>
-                <label for="name">Enter text:</label>
-                <textarea name="message" [(ngModel)]="text" ></textarea>
+            <div class="main-div">
+                <textarea name="message" rows="4" cols="50" [(ngModel)]="text" ></textarea>
                 <label>Image</label>
                 <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="checks[0]">
                 <label>abstract</label>
@@ -15,16 +14,17 @@
                 <input type="checkbox" placeholder="text" id="name" name="name" [(ngModel)]="checks[2]">
                 <input type="range" name="slider" [(ngModel)]="minConfidence">
             </div>
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <li *ngFor="let annotation of arr">
-            {{annotation.label}}
-            <img *ngIf="annotation.image" class="images" src={{annotation.image.full}}/> 
+        <div *ngFor="let annotation of arr">
+            <h1>{{annotation.label}}</h1>
+            <div>
+                <img *ngIf="annotation.image" class="images" src={{annotation.image.full}}/>
+            </div>
             {{annotation.abstract}}
             <div *ngFor="let categorie of annotation.categories">
                 {{categorie}}
             </div>
-        </li>
+        </div>
     </div>
 </div>

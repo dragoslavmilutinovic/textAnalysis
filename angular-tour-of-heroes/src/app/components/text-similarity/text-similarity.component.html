@@ -1,18 +1,16 @@
 <div>
-    <h3>Configuration page</h3>
-    <p>Configuration page visits:</p>
+    <h1>Text similarity</h1>
 
     <div>
         <form (submit)="checkTextSimilarities()" class="mb-5">
-            <div class="form-group mb-2">
-                <label for="name">User Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="text1" [(ngModel)]="text1">
-                <input type="text" placeholder="text2" id="name" name="name" [(ngModel)]="text2">
+            <div>
+                <textarea name="message" rows="4" cols="50" [(ngModel)]="text1" class="main" ></textarea>
+                <textarea name="message" rows="4" cols="50" [(ngModel)]="text2" ></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <div *ngIf="similarity!==0">
-            {{similarity}}
-        </div>
+        <h3 *ngIf="similarity!==0">
+            {{similarity*100}}%
+        </h3>
     </div>
 </div>

@@ -10,7 +10,7 @@ export class HistoryService {
   }
   recordApiCall(url:string) {
     const data = new Date().toJSON("yyyy/MM/dd HH:mm");
-    const history = `${data} ${url}`;
+    const history = `${data} GET ${url}`;
     this.api.push(history);
   }
   getRecordsOfApiCalls(){

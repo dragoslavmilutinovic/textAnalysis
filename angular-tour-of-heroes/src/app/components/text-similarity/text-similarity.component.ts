@@ -10,7 +10,7 @@ export class TextSimilarityComponent implements OnInit {
 
   text1: string;
   text2: string;
-  similarity: any;
+  similarity: number;
 
   constructor(private dandelionService: DandelionService) {
     this.text1 = '';
@@ -22,6 +22,7 @@ export class TextSimilarityComponent implements OnInit {
   }
 
   checkTextSimilarities() {
-    this.dandelionService.checkTextSimilarities(this.text1, this.text2).subscribe((data: any) => { this.similarity = data.similarity; });
+    this.dandelionService.checkTextSimilarities(this.text1, this.text2).subscribe((data: any) => { this.similarity = data.similarity; 
+    console.log(data)});
   }
 }
