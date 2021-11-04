@@ -77,9 +77,8 @@ export class DandelionService {
   }
 
   createApiCall(url:string,params:any):string{
-    var esc = encodeURIComponent;
     var query = Object.keys(params)
-    .map(k => esc(k) + '=' + esc(params[k]))
+    .map(k => k + '=' + params[k])
     .join('&');
     console.log(query);
     return `${url}?${query}`;
